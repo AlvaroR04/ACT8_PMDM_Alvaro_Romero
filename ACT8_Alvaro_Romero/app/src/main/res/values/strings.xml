@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ACT8_Alvaro_Romero</string>
+    <string name="name">Name:</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="favourite_os">Favourite operating system</string>
+    <string name="speciality">Speciality</string>
+    <string name="hours_study">Hours of study</string>
+    <string name="validate">Validate</string>
+    <string name="restart">Restart</string>
+    <string name="how_many">How many</string>
+    <string name="summary">Summary</string>
+    <string name="person_participated">person has participated</string>
+    <string name="people_participated">people have participated</string>
+</resources>

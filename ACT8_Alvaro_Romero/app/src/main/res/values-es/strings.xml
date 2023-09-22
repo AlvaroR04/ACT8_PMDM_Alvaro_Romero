@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ACT8_Alvaro_Romero</string>
+    <string name="name">Nombre:</string>
+    <string name="enter_name">Introduzca su nombre</string>
+    <string name="anonymous">Anónimo</string>
+    <string name="favourite_os">Sistema operativo preferido</string>
+    <string name="speciality">Especialidad</string>
+    <string name="hours_study">Horas de estudio</string>
+    <string name="validate">Validar</string>
+    <string name="restart">Reiniciar</string>
+    <string name="how_many">Cuántas</string>
+    <string name="summary">Resumen</string>
+    <string name="person_participated">persona ha participado</string>
+    <string name="people_participated">personas han participado</string>
+</resources>
