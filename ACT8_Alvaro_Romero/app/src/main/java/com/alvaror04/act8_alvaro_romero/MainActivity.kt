@@ -1,8 +1,8 @@
 package com.alvaror04.act8_alvaro_romero
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.RadioButton
 import android.widget.SeekBar
 import android.widget.Toast
 import com.alvaror04.act8_alvaro_romero.databinding.ActivityMainBinding
@@ -53,21 +53,23 @@ class MainActivity : AppCompatActivity() {
             mostrarToast(participacion)
         }
 
-        binding.bResumen.setOnClickListener {
-            binding.tvResumen.text = ""
-
-            for(e in encuestas) {
-                binding.tvResumen.append(e.toString() + "\n")
-            }
-        }
+//        binding.bResumen.setOnClickListener {
+//            binding.tvResumen.text = ""
+//
+//            for(e in encuestas) {
+//                binding.tvResumen.append(e.toString() + "\n")
+//            }
+//        }
 
         binding.bValidar.setOnClickListener {
             if(binding.edNombre.text.isNotEmpty() || binding.swAnonimo.isChecked) {
                 var so = ""
+                var listaEcuestados = ""
                 val nombre = if(binding.swAnonimo.isChecked)
                     application.getString(R.string.anonymous) else
                     binding.edNombre.text.toString()
                 val especialidades = ArrayList<String>()
+                val abrirResumen = Intent(this, Resumen::class.java)
 
                 var i = 0
                 var estaSeleccionado = false
@@ -86,6 +88,15 @@ class MainActivity : AppCompatActivity() {
                 encuestas.add (
                     Encuesta(nombre, so, especialidades, binding.sbHoras.progress)
                 )
+
+                for(e in encuestas) {
+                    listaEcuestados += "$e\n\n"
+                }
+
+                abrirResumen.putExtra("encuestados", listaEcuestados)
+                startActivity(abrirResumen)
+            } else {
+                mostrarToast(application.getString(R.string.err_NoName))
             }
         }
     }

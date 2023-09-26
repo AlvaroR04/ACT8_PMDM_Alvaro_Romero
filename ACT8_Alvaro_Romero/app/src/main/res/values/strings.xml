@@ -12,4 +12,7 @@
     <string name="summary">Summary</string>
     <string name="person_participated">person has participated</string>
     <string name="people_participated">people have participated</string>
+    <string name="thank_you">Thank you, your answer has been registered</string>
+    <string name="go_back">Go back</string>
+    <string name="err_NoName">Provide your name, or, at least, check the anonymous swich</string>
 </resources>

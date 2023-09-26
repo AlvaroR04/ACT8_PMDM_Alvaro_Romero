@@ -13,4 +13,7 @@
     <string name="summary">Resumen</string>
     <string name="person_participated">persona ha participado</string>
     <string name="people_participated">personas han participado</string>
+    <string name="thank_you">Gracias, su respuesta ha sido registrada</string>
+    <string name="go_back">Volver</string>
+    <string name="err_NoName">Introduzca su nombre, o, al menos, habilita el interruptor de anónimo</string>
 </resources>
