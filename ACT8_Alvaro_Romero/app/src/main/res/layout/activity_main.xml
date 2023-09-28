@@ -175,15 +175,18 @@
 
         <Button
             android:id="@+id/b_Validar"
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+            app:icon="@drawable/ic_validar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/validate"
-            style="@style/Widget.Material3.Button.ElevatedButton" />
+            />
 
         <Button
             android:id="@+id/b_Reiniciar"
-            style="@style/Widget.Material3.Button.ElevatedButton"
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+            app:icon="@drawable/ic_reiniciar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -191,7 +194,8 @@
 
         <Button
             android:id="@+id/b_Cuantas"
-            style="@style/Widget.Material3.Button.ElevatedButton"
+            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+            app:icon="@drawable/ic_cuantas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
