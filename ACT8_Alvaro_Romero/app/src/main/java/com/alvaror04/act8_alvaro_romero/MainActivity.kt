@@ -3,11 +3,11 @@ package com.alvaror04.act8_alvaro_romero
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.SeekBar
 import android.widget.Toast
 import com.alvaror04.act8_alvaro_romero.databinding.ActivityMainBinding
 import modelo.Almacen
 import modelo.Encuesta
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,19 +21,9 @@ class MainActivity : AppCompatActivity() {
         val grpOs = listOf(binding.rbWindows, binding.rbMac, binding.rbLinux)
         val grpEsp = listOf(binding.cbDam, binding.cbDaw, binding.cbAsir)
 
-        binding.sbHoras.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                binding.tvHoras.text = binding.sbHoras.progress.toString()
-            }
-
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-
-            }
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-
-            }
-        })
+        binding.sldHoras.addOnChangeListener { slider, valor, esUsuario ->
+            binding.tvHoras.text = valor.roundToInt().toString()
+        }
 
         binding.swAnonimo.setOnClickListener {
             binding.edNombre.isEnabled = !binding.swAnonimo.isChecked
@@ -53,8 +43,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bValidar.setOnClickListener {
-            if(binding.edNombre.text.isNotEmpty() || binding.swAnonimo.isChecked) {
-                val encuestaActual: Encuesta
+            if(binding.edNombre.text!!.isNotEmpty() || binding.swAnonimo.isChecked) {
+                val encuestado: Encuesta
 
                 var so = ""
                 val nombre = if(binding.swAnonimo.isChecked)
@@ -77,11 +67,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                encuestaActual = Encuesta(nombre, so, especialidades, binding.sbHoras.progress)
+                encuestado = Encuesta(nombre.trim(), so, especialidades, binding.sldHoras.value.roundToInt())
 
-                Almacen.encuestas.add (encuestaActual)
+                Almacen.encuestas.add (encuestado)
 
-                abrirResumen.putExtra("encuestado", encuestaActual)
+                abrirResumen.putExtra("encuestado", encuestado)
                 startActivity(abrirResumen)
             } else {
                 mostrarToast(application.getString(R.string.err_NoName))

@@ -8,30 +8,29 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:textSize="24sp" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/ed_Nombre"
-            android:layout_width="145dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/enter_name"
-            android:inputType="text"
-            android:textSize="24sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_Nombre"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="@string/enter_name"
+                android:inputType="text"
+                android:textSize="24sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <Switch
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/sw_Anonimo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +132,8 @@
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -146,11 +146,13 @@
             android:text="@string/hours_study"
             android:textSize="24sp" />
 
-        <SeekBar
-            android:id="@+id/sb_Horas"
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sld_Horas"
             android:layout_width="148dp"
             android:layout_height="match_parent"
-            android:max="24" />
+            android:valueFrom="0.0"
+            android:valueTo="24.0"
+            android:stepSize="1.0" />
 
         <TextView
             android:id="@+id/tv_Horas"
@@ -176,10 +178,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/validate" />
+            android:text="@string/validate"
+            style="@style/Widget.Material3.Button.ElevatedButton" />
 
         <Button
             android:id="@+id/b_Reiniciar"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -187,6 +191,7 @@
 
         <Button
             android:id="@+id/b_Cuantas"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
