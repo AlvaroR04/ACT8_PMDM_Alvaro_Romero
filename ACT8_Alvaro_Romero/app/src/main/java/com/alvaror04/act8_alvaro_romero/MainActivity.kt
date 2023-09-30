@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import auxiliar.Factorias
 import com.alvaror04.act8_alvaro_romero.databinding.ActivityMainBinding
 import modelo.Almacen
 import modelo.Encuesta
@@ -51,6 +52,9 @@ class MainActivity : AppCompatActivity() {
                     application.getString(R.string.anonymous) else
                     binding.edNombre.text.toString()
                 val especialidades = ArrayList<String>()
+                val imagen = if(binding.swAnonimo.isChecked) "anonimo"
+                    else Factorias.factoriaEnlaceImagen()
+
                 val abrirResumen = Intent(this, Resumen::class.java)
 
                 var i = 0
@@ -67,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                encuestado = Encuesta(nombre.trim(), so, especialidades, binding.sldHoras.value.roundToInt())
+                encuestado = Encuesta(nombre.trim(), so, especialidades, binding.sldHoras.value.roundToInt(), imagen)
 
                 Almacen.encuestas.add (encuestado)
 

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="grey">#888888</color>
+    <color name="purple">#AB00FF</color>
+    <color name="black">#000000</color>
+
     <color name="seed">#006c4a</color>
     <color name="md_theme_light_primary">#006C4A</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
