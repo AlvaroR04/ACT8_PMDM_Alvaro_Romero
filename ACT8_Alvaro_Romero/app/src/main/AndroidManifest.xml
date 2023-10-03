@@ -15,9 +15,6 @@
         android:theme="@style/Theme.ACT8_Alvaro_Romero"
         tools:targetApi="31">
         <activity
-            android:name=".Detalles"
-            android:exported="false" />
-        <activity
             android:name=".Resumen"
             android:exported="false" />
         <activity

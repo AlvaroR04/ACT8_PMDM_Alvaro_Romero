@@ -24,24 +24,13 @@ class Resumen : AppCompatActivity() {
             "${application.getString(R.string.thank_you)}, ${persona.nombre}, ${application.getString(R.string.answer_registered)}" else
             "${application.getString(R.string.thank_you)}, ${application.getString(R.string.answer_registered)}"
 
-//        for(e in Almacen.encuestas) {
-//            binding.tvEncuestas.append("$e\n\n")
-//        }
-
-        //miRecyclerView = binding.listaPersonajesRecycler as RecyclerView
         binding.rvEncuestados.setHasFixedSize(true)
         binding.rvEncuestados.layoutManager = LinearLayoutManager(this)
-        var miAdapter = MiAdaptadorRecycler(Almacen.encuestas, this)
+        val miAdapter = MiAdaptadorRecycler(Almacen.encuestas, this)
         binding.rvEncuestados.adapter = miAdapter
 
         binding.bVolver.setOnClickListener {
             finish()
         }
     }
-
-//    override fun onStop() {
-//        super.onStop()
-//
-//        Almacen.encuestas.clear()
-//    }
 }
