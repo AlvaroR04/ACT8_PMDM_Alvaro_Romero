@@ -4,6 +4,7 @@ import modelo.*
 import android.app.*
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -149,8 +150,7 @@ class MiAdaptadorRecycler (var encuestados : ArrayList<Encuesta>, var  context: 
             itemView.setOnClickListener {
                 if (pos == MiAdaptadorRecycler.seleccionado){
                     MiAdaptadorRecycler.seleccionado = -1
-                }
-                else {
+                } else {
                     MiAdaptadorRecycler.seleccionado = pos
                     Log.e("Fernando", "Seleccionado: ${Almacen.encuestas.get(MiAdaptadorRecycler.seleccionado).toString()}")
                 }
@@ -160,11 +160,49 @@ class MiAdaptadorRecycler (var encuestados : ArrayList<Encuesta>, var  context: 
                 Toast.makeText(context, "Valor seleccionado " +  MiAdaptadorRecycler.seleccionado.toString(), Toast.LENGTH_SHORT).show()
             }
 
-            b_Detalle.setOnClickListener {
-                val intento = Intent(context, Detalles::class.java)
-                intento.putExtra("encSelec", encuestado)
-                startActivity(context, intento, null)
+            itemView.setOnLongClickListener {
+                val resPositiva = { dialogo: DialogInterface, which: Int ->
+                    Almacen.encuestas.removeAt(pos)
+                    miAdaptadorRecycler.notifyDataSetChanged()
+                }
+
+                val resNegativa = {dialogo: DialogInterface, which: Int ->
+                    Toast.makeText (
+                        context,
+                        "Acción cancelada",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                val builder = AlertDialog.Builder(context)
+
+                with(builder) {
+                    setTitle("Eliminar encuesta")
+                    setMessage("¿Desea eliminar esta encuesta?")
+                    setPositiveButton("Sí", resPositiva)
+                    setNegativeButton("No", resNegativa)
+                    show()
+                }
+
+                true
             }
+
+            b_Detalle.setOnClickListener {
+                val builder = AlertDialog.Builder(context)
+
+                with(builder) {
+                    setTitle("Datos de ${encuestado.nombre}")
+                    setMessage(
+                        "· ${context.getString(R.string.favourite_os)}: ${encuestado.so}\n\n" +
+                        "· ${context.getString(R.string.speciality)}: ${encuestado.especialidades}\n\n" +
+                        "· ${context.getString(R.string.hours_study)}: ${encuestado.horasEstudio}"
+                    )
+                    setPositiveButton("Aceptar", null)
+                    show()
+                }
+            }
+
+
         }
     }
 }
