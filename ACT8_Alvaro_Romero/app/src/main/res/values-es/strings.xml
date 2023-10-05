@@ -18,4 +18,7 @@
     <string name="err_NoName">Introduzca su nombre, o, al menos, habilita el interruptor de anónimo</string>
     <string name="answer_registered">tu respuesta ha sido registrada</string>
     <string name="hour_study">Hora de estudio</string>
+    <string name="selected_value">Valor seleccionado:</string>
+    <string name="element_deleted">El elemento fue eliminado satisfactoriamente</string>
+    <string name="err_Delete">Ocurrió un error al tratar de eliminar el elemento</string>
 </resources>
