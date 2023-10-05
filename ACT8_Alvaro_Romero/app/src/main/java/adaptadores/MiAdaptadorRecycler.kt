@@ -15,12 +15,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import auxiliar.Factorias
+import auxiliares.Auxiliar
+import auxiliares.Conexion
 import com.bumptech.glide.Glide
 import com.alvaror04.act8_alvaro_romero.*
-import kotlin.random.Random
 
 class MiAdaptadorRecycler (var encuestados : ArrayList<Encuesta>, var  context: Context) : RecyclerView.Adapter<MiAdaptadorRecycler.ViewHolder>(){
 
@@ -157,12 +156,28 @@ class MiAdaptadorRecycler (var encuestados : ArrayList<Encuesta>, var  context: 
                 //Con la siguiente instrucción forzamos a recargar el viewHolder porque han cambiado los datos. Así pintará al seleccionado.
                 miAdaptadorRecycler.notifyDataSetChanged()
 
-                Toast.makeText(context, "Valor seleccionado " +  MiAdaptadorRecycler.seleccionado.toString(), Toast.LENGTH_SHORT).show()
+                Auxiliar.mostrarToast(
+                    context,
+                    "${context.getString(R.string.element_deleted)} ${seleccionado}"
+                )
             }
 
             itemView.setOnLongClickListener {
                 val resPositiva = { dialogo: DialogInterface, which: Int ->
-                    Almacen.encuestas.removeAt(pos)
+
+                    if(Conexion.borrarEncuesta(context, Almacen.encuestas.get(pos).id) == 1) {
+                        Almacen.encuestas.removeAt(pos)
+                        Auxiliar.mostrarToast(
+                            context,
+                            context.getString(R.string.element_deleted)
+                        )
+                    } else {
+                        Auxiliar.mostrarToast(
+                            context,
+                            context.getString(R.string.err_Delete)
+                        )
+                    }
+
                     miAdaptadorRecycler.notifyDataSetChanged()
                 }
 
@@ -192,7 +207,8 @@ class MiAdaptadorRecycler (var encuestados : ArrayList<Encuesta>, var  context: 
 
                 with(builder) {
                     setTitle("Datos de ${encuestado.nombre}")
-                    setMessage(
+                    setMessage (
+                        "· ID: ${encuestado.id}\n\n" +
                         "· ${context.getString(R.string.favourite_os)}: ${encuestado.so}\n\n" +
                         "· ${context.getString(R.string.speciality)}: ${encuestado.especialidades}\n\n" +
                         "· ${context.getString(R.string.hours_study)}: ${encuestado.horasEstudio}"
@@ -201,7 +217,6 @@ class MiAdaptadorRecycler (var encuestados : ArrayList<Encuesta>, var  context: 
                     show()
                 }
             }
-
 
         }
     }

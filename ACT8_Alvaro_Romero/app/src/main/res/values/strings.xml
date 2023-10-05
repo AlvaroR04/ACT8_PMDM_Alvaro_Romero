@@ -17,4 +17,7 @@
     <string name="err_NoName">Provide your name, or, at least, check the anonymous swich</string>
     <string name="answer_registered">your answer has been registered</string>
     <string name="hour_study">Hour of study</string>
+    <string name="selected_value">Selected value:</string>
+    <string name="element_deleted">The element was deleted successfully</string>
+    <string name="err_Delete">An error has occurred while the element was being deleted</string>
 </resources>
