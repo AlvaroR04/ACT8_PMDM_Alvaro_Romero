@@ -18,17 +18,21 @@ class Resumen : AppCompatActivity() {
         binding = ActivityResumenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Obten los datos del encuestado pasados de la otra actividad (MainActivity)
         val persona = intent.getSerializableExtra("encuestado") as Encuesta
 
+        //Si tiene nombre, escribelo en el mensaje. Sino, ignoralo.
         binding.tvGracias.text = if(!persona.nombre.equals(application.getString(R.string.anonymous)))
             "${application.getString(R.string.thank_you)}, ${persona.nombre}, ${application.getString(R.string.answer_registered)}" else
             "${application.getString(R.string.thank_you)}, ${application.getString(R.string.answer_registered)}"
 
+        //Configura el RecycleView
         binding.rvEncuestados.setHasFixedSize(true)
         binding.rvEncuestados.layoutManager = LinearLayoutManager(this)
         val miAdapter = MiAdaptadorRecycler(Almacen.encuestas, this)
         binding.rvEncuestados.adapter = miAdapter
 
+        //Cuando se pulsa al boton "Volver", este finalizara la actividad
         binding.bVolver.setOnClickListener {
             finish()
         }

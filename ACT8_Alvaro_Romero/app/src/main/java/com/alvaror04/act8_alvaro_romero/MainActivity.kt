@@ -27,21 +27,39 @@ class MainActivity : AppCompatActivity() {
 
         obtenerEncuestas()
 
-        //Acciones con los controles de la actividad
+        /*
+            Cuando cambie el valor del slider de "Horas de estudio",
+            el textview de horas tendra el mismo valor que el slider
+            de "Horas de estudio"
+        */
+
         binding.sldHoras.addOnChangeListener { slider, valor, esUsuario ->
             binding.tvHoras.text = valor.roundToInt().toString()
         }
 
+        /*
+            Al presionar el interruptor "Anonimo",
+            el campo de texto del nombre estara disponible
+            mientras el interruptor de anonimo no este activo
+        */
         binding.swAnonimo.setOnClickListener {
-            //El campo de texto del nombre estara disponible mientras el interruptor de anonimo no este activo
             binding.edNombre.isEnabled = !binding.swAnonimo.isChecked
         }
 
+        /*
+            Al presionar el boton "Reiniciar",
+            finaliza la actividad y la vuelve a iniciar
+        */
+
         binding.bReiniciar.setOnClickListener {
-            //Finaliza la actividad y la vuelve a iniciar
             finish()
             startActivity(intent)
         }
+
+        /*
+            Al presionar al boton "Cuantas",
+            muestra un toast con el nº de participantes
+        */
 
         binding.bCuantas.setOnClickListener {
             //Si es una participacion, usa el singular. Sino, el plural

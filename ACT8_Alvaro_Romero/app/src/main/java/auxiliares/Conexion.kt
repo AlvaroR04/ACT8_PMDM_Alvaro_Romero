@@ -15,6 +15,8 @@ object Conexion {
         val bd = admin.writableDatabase
         val registro = ContentValues()
 
+        //Incluye los datos del usuario e insertalos en la tabla ENCUESTA
+
         registro.put("id", e.id)
         registro.put("nombre", e.nombre)
         registro.put("so", e.so)
@@ -22,6 +24,12 @@ object Conexion {
         registro.put("imagen", e.imagen)
 
         bd.insert("ENCUESTA", null, registro)
+
+        /*
+            Incluye e inserta cada especialidad en la tabla interrelacionada
+            entre ENCUESTA y ESPECIALIDADES, ya que ambos tienen una
+            cardinalidad N:M (muchos a muchos)
+        */
 
         for(esp in e.especialidades) {
             val espRegistro = ContentValues()
@@ -49,6 +57,11 @@ object Conexion {
             null
         )
 
+        /*
+            Si la anterior consulta ha funcionado, realiza
+            la siguiente consulta de eliminacion.
+        */
+
         if(cod == 1) {
             cod = bd.delete (
                 "ENCUESTA",
@@ -67,21 +80,28 @@ object Conexion {
         val admin = AdminSQLiteConexion(contexto, bbdd, null, 1)
         val bd = admin.writableDatabase
 
+        //Obten las encuestas registradas
         val filaEncuesta = bd.rawQuery (
             "SELECT id, nombre, so, horas_estudio, imagen FROM ENCUESTA",
             null
         )
+
+        //Recorre cada encuesta registrada
         while(filaEncuesta.moveToNext()) {
             val especialidades = ArrayList<String>()
+
+            //A su vez, obten las especialidades del usuario actual
             val filaEsp = bd.rawQuery (
                 "SELECT nombre_esp FROM ENC_ESP WHERE id_encuesta = ${filaEncuesta.getInt(0)}",
                 null
             )
 
+            //Recorre esas especialidades y agregalas al vector de especialidades
             while(filaEsp.moveToNext()) {
                 especialidades.add(filaEsp.getString(0))
             }
 
+            //Agrega los datos obtenidos al vector de encuestas
             encuestas.add (
                 Encuesta (
                     filaEncuesta.getInt(0),
@@ -100,17 +120,24 @@ object Conexion {
     }
 
     fun existeID(contexto: Context, id: Int): Boolean {
-        var existe = false
+        var existe = false //Para comprobar si el ID ya existe
         val admin = AdminSQLiteConexion(contexto, bbdd, null, 1)
         val bd = admin.writableDatabase
+
+        //Obten las encuestas de todos los usuarios
+
         val fila = bd.rawQuery (
             "SELECT id FROM ENCUESTA",
             null
         )
 
+        //Mientras haya elementos y no exista el ID
+
         while(fila.moveToNext() && !existe) {
+            //Comprueba que el ID seleccionado sea igual al pasado
             existe = (id == fila.getInt(0))
         }
+
         bd.close()
 
         return existe
